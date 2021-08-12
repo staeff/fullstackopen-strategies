@@ -4,31 +4,31 @@ const Headline = ({ text }) => <h2>{text}</h2>
 
 const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
 
-const RandomAnecdote = ({ anecdotes, points, selected }) => {
-  const anecdote = anecdotes[selected]
+const RandomStrategy = ({ strategies, points, selected }) => {
+  const strategy = strategies[selected]
   const votes = points[selected]
 
   return (
     <div>
-      {anecdote} <br />
+      {strategy} <br />
       has {votes} votes<br /><br />
     </div>
   )
 }
 
-const MostVotedAnecdote = ({anecdotes, points}) => {
+const MostVotedStrategy = ({strategies, points}) => {
   const mostVoted = points.indexOf(Math.max(...points))
 
   return (
     <div>
-      {anecdotes[mostVoted]}<br />
+      {strategies[mostVoted]}<br />
       has {points[mostVoted]} votes<br /><br />
     </div>
   )
 }
 
 const App = () => {
-  const anecdotes = [
+  const strategies = [
     "If it hurts, do it more often",
     "Premature optimization is the root of all evil.",
     "Accept advice",
@@ -147,14 +147,14 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
-  const [points, setPoints] = useState(new Array(anecdotes.length).fill(0))
+  const [points, setPoints] = useState(new Array(strategies.length).fill(0))
 
   const getRandomInt = (max) => {
     return Math.floor(Math.random() * max)
   }
 
-  const handleAnecdoteButton = () => {
-    setSelected(getRandomInt(anecdotes.length))
+  const handleStrategyButton = () => {
+    setSelected(getRandomInt(strategies.length))
   }
 
   const handleVoteButton = () => {
@@ -165,12 +165,12 @@ const App = () => {
 
   return (
     <div align="center">
-      <Headline text='Random Anecdote' />
-      <RandomAnecdote anecdotes={anecdotes} points={points} selected={selected} />
+      <Headline text='Random Strategy' />
+      <RandomStrategy strategies={strategies} points={points} selected={selected} />
       <Button handleClick={handleVoteButton} text='vote' />
-      <Button handleClick={handleAnecdoteButton} text='next anecdote' />
-      <Headline text='Most voted anecdote' />
-      <MostVotedAnecdote anecdotes={anecdotes} points={points} />
+      <Button handleClick={handleStrategyButton} text='next strategy' />
+      <Headline text='Most voted strategy' />
+      <MostVotedStrategy strategies={strategies} points={points} />
     </div>
   )
 }
